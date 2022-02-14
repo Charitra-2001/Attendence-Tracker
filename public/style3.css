@@ -1,0 +1,14 @@
+.subjectcol
+{
+  /* margin: 0px auto; */
+margin: 0px auto;
+/* display: inline list-item; */
+width: 18rem;
+text-align: left;
+}
+.check{
+    float: right;
+}
+#load{
+    display: none;
+}

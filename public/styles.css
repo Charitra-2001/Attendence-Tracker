@@ -1,0 +1,275 @@
+/* html {
+  background-color: #E4E9FD;
+  background-image: -webkit-linear-gradient(65deg, #A683E3 50%, #E4E9FD 50%);
+  min-height: 1000px;
+  /* font-family: 'helvetica neue'; */
+/* } */
+body{
+  background-color: white;
+}
+.container-fluid{
+  height:40rem;
+  padding: 0;
+}
+#head{
+  color: white;
+display: inline-block;
+font-size: 7rem;
+/* background-color: #3ff1a6; */
+background-color: black;
+margin-bottom: 0;
+margin-top: 0;
+padding-left: 33px;
+padding-bottom: 0px;
+padding-top: 0px;
+
+letter-spacing: 7rem;
+/* font-family: 'Arimo', sans-serif; */
+/* font-family: 'Bungee Shade', cursive; */
+font-family: 'Bungee Hairline', cursive;
+font-family: 'Bungee Inline', cursive;
+/* font-family: 'Bungee Shade', cursive; */
+display: block;}
+.content
+{
+  margin-top: -37rem;
+margin-left: auto;
+margin-right: auto;
+width: 57%;
+}
+#head1{
+  color: black;
+
+  margin-top: -1.5rem;
+}
+
+#head2{
+  color: black;
+  margin-top: 1.5rem;
+  padding-left: 0px;
+margin-left: -2px;
+
+
+}
+/* #head3{
+  color: black;
+position: absolute;
+margin-top: 318px;
+} */
+#head4{
+  color: black;
+
+margin-top: 1.5rem;
+}
+.vert{
+  position: relative;
+font-size: 7rem;
+font-family: 'Bungee Hairline', cursive;
+font-family: 'Bungee Inline', cursive;
+width: 50%;
+}
+.ht{
+  display: inline-block;
+width: 12%;
+height: 90%;
+padding: 2%;
+}
+  
+
+h1 {
+  /* color: #fff; */
+  padding: 10px;
+}
+
+.box {
+  max-width: 590px;
+  margin: 50px auto;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+}
+
+#heading {
+  background-color: yellow;
+  text-align: center;
+  color: black;
+  font-family: 'Montserrat', sans-serif;
+  
+}
+
+.item {
+  height: 4.5rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #F1F1F1;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.item:last-child {
+  border-bottom: 0;
+}
+
+input:checked+p {
+  text-decoration: line-through;
+  text-decoration-color: #A683E3;
+}
+
+input[type="checkbox"] {
+  margin: 20px;
+}
+
+p {
+  margin: 0;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: 200;
+  color: #00204a;
+}
+
+form.item {
+  text-align: center;
+  margin-left: 20px;
+}
+
+button {
+  min-height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border-color: transparent;
+  background-color: #A683E3;
+  color: #fff;
+  font-size: 30px;
+  padding-bottom: 6px;
+  border-width: 0;
+}
+
+input[type="text"] {
+  text-align: center;
+  height: 60px;
+  margin-right: 47px;
+  top: 10px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  font-weight: 200;
+  width: 428px;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  box-shadow: inset 0 -3px 0 0 #A683E3;
+}
+
+::placeholder {
+  color: grey;
+  opacity: 1;
+}
+
+footer {
+  color: white;
+  color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+/* SECOND PAGE */
+.main
+{
+  margin:91px auto;
+width: 1359px;
+height: fit-content;
+
+}
+.days>p{
+  /* font-size: 3rem;
+  display: inline-block;
+  background-color: yellow;
+  width: 25%;
+  margin-right: 2rem; */
+  font-size: 2rem;
+display: inline-block;
+background-color: yellow;
+width: 257px;
+/* margin-right: 2rem; */
+text-align: center;
+
+}
+.day1{
+  font-size: 1rem;
+  
+border: 124px black;
+border-radius: 20px;
+background-color: yellowgreen;
+margin: 17px;
+  margin-left: 17px;
+padding: 10px;
+}
+.day2{
+  font-size: 1rem;
+
+border: 124px black;
+border-radius: 20px;
+background-color: yellowgreen;
+margin: 17px;
+  margin-left: 17px;
+padding: 10px;
+}
+.day3{
+  font-size: 1rem;
+  
+border: 124px black;
+border-radius: 20px;
+background-color: yellowgreen;
+margin: 17px;
+  margin-left: 17px;
+padding: 10px;
+}
+.day4{
+  font-size: 1rem;
+  
+border: 124px black;
+border-radius: 20px;
+background-color: yellowgreen;
+margin: 17px;
+  margin-left: 17px;
+padding: 10px;
+}
+.day5{
+  font-size: 1rem;
+
+border: 124px black;
+border-radius: 20px;
+background-color: yellowgreen;
+margin: 17px;
+  margin-left: 17px;
+padding: 10px;
+}
+/* #day1{
+  margin-right: 50px;
+}
+#day2{
+  margin-right: 50px;
+}
+#day3{
+  margin-right: 50px;
+}
+#day4{
+  margin-right: 50px;
+}
+#day5{
+  margin-right: 50px;
+} */
+.subs{
+  display: inline-block;
+}
+.column{
+  float: left;
+  width: 20%;
+}
+.hide{
+  visibility: collapse;
+}
+.visible{
+  visibility: visible;
+}
+
+

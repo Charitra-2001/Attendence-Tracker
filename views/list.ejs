@@ -1,0 +1,48 @@
+<%- include ("header") -%>
+
+<body>
+<div class="container-fluid">
+    <h1 id="head">TABLE</h1>
+    <div class="ht">
+    <h1 class="vert" id="head1">I</h1>
+    <h1 class="vert" id="head2">M</h1>
+    <!-- <h1 class="vert" id="head3">L</h1> -->
+    <h1 class="vert" id="head4">E</h1>
+</div>
+<div class="content">
+    <div class=" box" id="heading">
+    <h1><%= title %></h1>
+    </div>
+    <div class=" box">
+        <img id="img1" style="position: absolute;width: 19%;right: 4%;top: 12%;transform: rotate(20deg)" src="/public/imgs/social-media-marketing.png" alt="">
+        <img id="img1" style="position: absolute;width: 10%;left: 13%;top: 29%;transform: rotate(-10.67grad);" src="/public/imgs/hourglass.png" alt="">
+        <img id="img1" style="position: absolute;width: 20%;left: 76%;top: 70%;/*! transform: rotate(-24deg);" src="/public/imgs/stress-management.png" alt="">
+        <img id="img1" style="position: absolute;width: 14%;left: 11%;top: 71%;transform: rotate(13.33grad);" src="/public/imgs/online-class.png" alt="">
+       
+        <% newListItems.forEach(function(item){ %>
+            <form action="/delete" method="post">
+                <div class="item">
+                    <!-- form submission when checkbox checked -->
+                    <input name="checkbox" type="checkbox" value="<%=item. _id%>" onChange="this.form.submit()">
+                    <p><%= item.name %></p>
+                </div>
+                <input type="hidden" name="listName" value="<%= title %>"></input>
+            </form>
+        <% }) %>
+
+        <form class="item" action="/" method="post">
+            <input name="listItem" id="item" type="text" placeholder="New Item">
+            <button type="submit" style="margin-right: 15px;" name="list"  value=<%=title %>>+</button>
+        </form>
+    </div>
+
+
+    <form action="/days" method="post">
+        <div style="margin: 50px auto;text-align: center;">
+    <button type="submit" style="width: 14rem;border-radius: 33px;background-color: yellow;color: black;font-family: 'Montserrat', 
+    sans-serif;padding-top: 7px;box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);" >SUBMIT</button>
+</div>    
+</form>
+</div>
+
+<%- include ("footer") -%>
