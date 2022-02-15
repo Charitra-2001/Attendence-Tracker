@@ -598,7 +598,7 @@ app.get("/next/:userName", function (req, res) {
 // // ! Third Page starts from Here
 
 
-// const Subject = mongoose.model("Subject", subjectSchema);
+const Subject = mongoose.model("Subject", subjectSchema);
 
 // // function check(y,z)
 // // {
@@ -611,52 +611,87 @@ app.get("/next/:userName", function (req, res) {
 // // }
 
 // let week;
-
+// const subjectSchema = {
+//   name: String,
+//   data: [],
+//   days: [],
+//   totalDays: [],
+// };
 // //POST - ADDING DATES
-// app.post("/attendance", async function (req, res) {
-//   const sol = req.body.datas;
-//   let today = new Date().toISOString().slice(0, 10);
-//   // let t=new Item({
-//   //     name:today
-//   // })
-//   // console.log(sol);
-//   JSON.stringify(sol);
-//   console.log(sol.length);
-//   for (let i = 0; i < sol.length; i++) {
-//     console.log(i);
-//     const x = sol[i];
-//     //     Subject.findOne({name:sol[i]},function(err,found){
-//     //         if(!err){
-//     //             console.log(found.name)
-//     //             Subject.findOneAndUpdate({name:found.name},{$push:{data:today}},function(err,added){
-//     //                 if(!err)
-//     //                 {
-//     //                     console.log("Added")
-//     //                 }
-//     //             })
-//     //             // found.data.push(today);
-//     //     }
-//     // })
-//     const ab = await Subject.findOne({ name: x });
-//     if (ab === null) {
-//       const cr = await Subject.create({ name: x, data: today });
-//       console.log(cr);
-//     } else {
-//       console.log(x);
-//       const se = await Subject.updateOne(
-//         { name: x },
-//         {
-//           $set: {
-//             data: [...ab.data, today],
-//           },
-//         }
-//       );
-//     }
-//   }
-//   res.redirect("/total")
-// });
+function findSub(sub,dayName)
+{
+  for(let i=0;i<sub.length;i++)
+  {
+    if(sub[i].name===dayName)return i;
+  }
+  return -1;
+}
+app.post("/attendance/:userName", async function (req, res) {
+  const {userName}=req.params;
+  console.log(userName)
+  const sol = req.body.datas;
+  let today = new Date().toISOString().slice(0, 10);
+  // let t=new Item({
+  //     name:today
+  // })
+  // console.log(sol);
+  JSON.stringify(sol);
+  console.log(sol.length);
+  for (let i = 0; i < sol.length; i++) {
+    console.log(i);
+    const x = sol[i];
+    //     Subject.findOne({name:sol[i]},function(err,found){
+    //         if(!err){
+    //             console.log(found.name)
+    //             Subject.findOneAndUpdate({name:found.name},{$push:{data:today}},function(err,added){
+    //                 if(!err)
+    //                 {
+    //                     console.log("Added")
+    //                 }
+    //             })
+    //             // found.data.push(today);
+    //     }
+    // })
+    const ab = await User.findOne({ uname: userName});
+    // console.log(ab);
+    const zz = findSub(ab.usubjects,sol[i])
+    if ( zz === -1) {
+      console.log("HIIIIIIII")
+      const newSub = new Subject({
+        name:sol[i],
+        data:today,
+        days:[],
+        totalDays:[]
+      })
+      console.log(newSub)
+      const ba = await User.updateOne({uname:userName},{
 
-// let work = [];
+        $set:{
+          usubjects:[...ab.usubjects,newSub]
+        }
+
+      })
+      
+    } else {
+
+      console.log(ab.usubjects[zz].name);
+      User.findOne({uname:userName},function(err,found){
+        if(!err)
+        {
+          if(found)
+          {
+              found.usubjects[zz].data.push(today);
+              found.save();
+              console.log(found.usubjects)
+          }
+        }
+      })
+    }
+  }
+  res.redirect("/total")
+});
+
+let work = [];
 
 //FOR DAYS AND ALL
 app.post("/subject", async function (req, res) {
@@ -713,21 +748,23 @@ app.post("/subject", async function (req, res) {
 
 app.get("/attendence/:userName", async function (req, res) {
   console.log("I M HERE")
-  // const d = new Date();
-  // let day = 1
-  // const a = await List.findOne({ name: weekdays[day - 1] });
-  // work.push(weekdays[day - 1]);
-  // if (a !== null) {
-  //   for (let i = 3; i < a.items.length; i++) {
-  //     work.push(a.items[i].name);
-  //   }
-  // }
+  const {userName}=req.params;
+  const d = new Date();
+  let day = d.getDay();
+  const a = await User.findOne({ uname:userName });
+  work.push(weekdays[day - 1]);
+  if (a !== null) {
+    for (let i = 3; i < a.udays[day-1].items.length; i++) {
+      work.push(a.udays[day-1].items[i].name);
+    }
+  }
 
-  // res.redirect("/attend");
+  res.redirect("/attend/"+userName);
 });
-// app.get("/attend", function (req, res) {
-//   res.render("thirdpage", { day: work });
-// });
+app.get("/attend/:userName", function (req, res) {
+  const {userName}=req.params
+  res.render("thirdpage", { day: work,user:userName });
+});
 
 // // ! Forth page starts from here
 // let one = [];
