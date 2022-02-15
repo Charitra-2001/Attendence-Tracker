@@ -590,7 +590,7 @@ app.get("/nxt/:userName", async function (req, res) {
 app.get("/next/:userName", function (req, res) {
   console.log(arr.length);
   const{userName}=req.params
-  res.render("secondpage", { data: arr, months:1});
+  res.render("secondpage", { data: arr, months:1,user:userName});
 });
 
 // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -658,71 +658,73 @@ app.get("/next/:userName", function (req, res) {
 
 // let work = [];
 
-// //FOR DAYS AND ALL
-// app.get("/subject", async function (req, res) {
-//   const month = await Duration.findOne({ name: "duration" });
-//   console.log(month.value);
-//   var required = month.value * 4;
-//   week = required;
-//   console.log(required);
-//   console.log(weekdays.length);
-//   for (let k = 0; k < weekdays.length; k++) {
-//     const weekday = weekdays[k];
-//     console.log(weekday);
-//     const day = await List.findOne({ name: weekday });
-//     {
-//       for (i = 3; i < day.items.length; i++) {
-//         const sub = await Subject.findOne({ name: day.items[i].name });
-//         {
-//           if (sub === null) {
-//             const newSub = await Subject.create({
-//               name: day.items[i].name,
-//               days: required,
-//             });
-//             console.log(newSub);
-//           } else {
-//             const updateSub = await Subject.updateOne(
-//               { name: day.items[i].name },
-//               {
-//                 $set: {
-//                   days: [...sub.days, required],
-//                 },
-//               }
-//             );
-//           }
-//           const find = await Subject.findOne({ name: day.items[i].name });
+//FOR DAYS AND ALL
+app.post("/subject", async function (req, res) {
+  // const month = await Duration.findOne({ name: "duration" });
+  // console.log(month.value);
+  // var required = month.value * 4;
+  // week = required;
+  // console.log(required);
+  // console.log(weekdays.length);
+  // for (let k = 0; k < weekdays.length; k++) {
+  //   const weekday = weekdays[k];
+  //   console.log(weekday);
+  //   const day = await List.findOne({ name: weekday });
+  //   {
+  //     for (i = 3; i < day.items.length; i++) {
+  //       const sub = await Subject.findOne({ name: day.items[i].name });
+  //       {
+  //         if (sub === null) {
+  //           const newSub = await Subject.create({
+  //             name: day.items[i].name,
+  //             days: required,
+  //           });
+  //           console.log(newSub);
+  //         } else {
+  //           const updateSub = await Subject.updateOne(
+  //             { name: day.items[i].name },
+  //             {
+  //               $set: {
+  //                 days: [...sub.days, required],
+  //               },
+  //             }
+  //           );
+  //         }
+  //         const find = await Subject.findOne({ name: day.items[i].name });
 
-//           const length = find.days.length;
-//           const semLength = length * required;
+  //         const length = find.days.length;
+  //         const semLength = length * required;
 
-//           const total = await Subject.updateOne(
-//             { name: day.items[i].name },
-//             {
-//               $set: {
-//                 totalDays: semLength,
-//               },
-//             }
-//           );
-//         }
-//       }
-//     }
-//   }
-//   res.redirect("/attendence");
-// });
+  //         const total = await Subject.updateOne(
+  //           { name: day.items[i].name },
+  //           {
+  //             $set: {
+  //               totalDays: semLength,
+  //             },
+  //           }
+  //         );
+  //       }
+  //     }
+  //   }
+  // }
+  const u=req.body.user
+  res.redirect("/attendence"+"/"+u);
+});
 
-// app.get("/attendence", async function (req, res) {
-//   const d = new Date();
-//   let day = 1
-//   const a = await List.findOne({ name: weekdays[day - 1] });
-//   work.push(weekdays[day - 1]);
-//   if (a !== null) {
-//     for (let i = 3; i < a.items.length; i++) {
-//       work.push(a.items[i].name);
-//     }
-//   }
+app.get("/attendence/:userName", async function (req, res) {
+  console.log("I M HERE")
+  // const d = new Date();
+  // let day = 1
+  // const a = await List.findOne({ name: weekdays[day - 1] });
+  // work.push(weekdays[day - 1]);
+  // if (a !== null) {
+  //   for (let i = 3; i < a.items.length; i++) {
+  //     work.push(a.items[i].name);
+  //   }
+  // }
 
-//   res.redirect("/attend");
-// });
+  // res.redirect("/attend");
+});
 // app.get("/attend", function (req, res) {
 //   res.render("thirdpage", { day: work });
 // });

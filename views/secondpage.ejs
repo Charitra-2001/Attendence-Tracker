@@ -76,7 +76,8 @@
       </form>
       </div>
       <div class="col">
-        <form action="/subject" method="get">
+        <form action="/subject" method="post">
+        <input type="hidden" name="user" value="<%= user %>"></input>
         <button  style="width: 12rem;" class="btn btn-success">PROCEED</button>
       </form>
       </div>
