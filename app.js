@@ -53,6 +53,8 @@ const item3 = new Item({
 const defaultItems = [item1, item2, item3];
 let c = 0;
 let i=0
+let isLogin;
+let currentName
 const dayss = ["Monday","Tuesday", "Wednesday", "Thursday", "Friday"];
 const days = ["Monday","Tuesday", "Wednesday", "Thursday", "Friday","nxt"];
 
@@ -61,10 +63,9 @@ const listSchema = {
   items: [itemsSchema],
 };
 const List = mongoose.model("List", listSchema);
-
-
 const userSchema={
   uname:String,
+  pass:String,
   udays:[listSchema]
 }
 
@@ -73,10 +74,12 @@ const User=mongoose.model("User",userSchema)
 let userName;
 let Name;
 app.get("/",function(req,res){
+  isLogin=0
   i=0
   c=0
 res.render("welcome")
 })
+
 const daysss=days[i]
 app.post("/reg",function(req,res)
 {
@@ -84,6 +87,8 @@ app.post("/reg",function(req,res)
   c=0
   userName= req.body.user;
   Name=userName
+  currentName=req.body.user
+  pas=req.body.pas
   User.findOne({uname:userName},function(err,foundUser){
     if(!err)
     {
@@ -91,21 +96,40 @@ app.post("/reg",function(req,res)
       {
         const user= new User({
           uname:userName,
-          udays:[]
-          
+          udays:[],
+          pass:pas
         });
         user.save();
+        isLogin=1
         res.redirect("/days/"+daysss+"/"+userName)
       }
       else{
-        res.redirect("/Monday/"+userName);
-      }
+        User.findOne({uname:userName},function(err,foundUser){
+          if(!err)
+          {
+            if(foundUser)
+            {
+              if(foundUser.pass === pas)
+              {
+                isLogin=1
+                res.redirect("/Monday/"+userName);        
+              }
+              else{
+                console.log("FAILED")
+              } 
+            }
+          }
+        });
     }
+  }
   })
 })
+
 var l=0;
 // const days = ["Monday","Tuesday", "Wednesday", "Thursday", "Friday"];
 app.get("/days/:daysss/:userName", async function (req, res) { 
+  if(isLogin===1)
+  {
   i=0
   c=0
     const {userName}=(req.params)
@@ -179,9 +203,12 @@ app.get("/days/:daysss/:userName", async function (req, res) {
     }
 
   
-  
+  }
 });
 app.get("/Monday/:userName",function(req,res){
+  const {userName}=req.params;
+  if(isLogin===1 && userName===currentName)
+  {
   i=0;
   c=0
   const {userName}=req.params;
@@ -200,9 +227,12 @@ app.get("/Monday/:userName",function(req,res){
             }
           }
         })
+      }
 })
 app.get("/Tuesday/:userName",function(req,res){
   const {userName}=req.params;
+  if(isLogin===1 && userName===currentName){
+  
   console.log(req.params)
   User.findOne({uname:userName},function(err,found){
 
@@ -218,9 +248,12 @@ app.get("/Tuesday/:userName",function(req,res){
             }
           }
         })
+      }
 })
 app.get("/Wednesday/:userName",function(req,res){
   const {userName}=req.params;
+  if(isLogin===1 && userName===currentName){
+  
   console.log(req.params)
   User.findOne({uname:userName},function(err,found){
 
@@ -236,8 +269,11 @@ app.get("/Wednesday/:userName",function(req,res){
             }
           }
         })
+      }
 })
 app.get("/Thursday/:userName",function(req,res){
+  const {userName}=req.params;
+  if(isLogin===1 && userName===currentName){
   const {userName}=req.params;
   console.log(req.params)
   User.findOne({uname:userName},function(err,found){
@@ -254,8 +290,11 @@ app.get("/Thursday/:userName",function(req,res){
             }
           }
         })
+      }
 })
 app.get("/Friday/:userName",function(req,res){
+  const {userName}=req.params;
+  if(isLogin===1 && userName===currentName){
   const {userName}=req.params;
   console.log(req.params)
   User.findOne({uname:userName},function(err,found){
@@ -272,6 +311,7 @@ app.get("/Friday/:userName",function(req,res){
             }
           }
         })
+      }
 })
 // app.get("/:userName",function(req,res){
 //   const {userName}=(req.params)
