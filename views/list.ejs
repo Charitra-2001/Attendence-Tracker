@@ -12,6 +12,7 @@
 <div class="content">
     <div class=" box" id="heading">
     <h1><%= title %></h1>
+    <h1><%= user %></h1>
     </div>
     <div class=" box">
         <img id="img1" style="position: absolute;width: 19%;right: 4%;top: 12%;transform: rotate(20deg)" src="/public/imgs/social-media-marketing.png" alt="">
@@ -31,6 +32,7 @@
         <% }) %>
 
         <form class="item" action="/" method="post">
+            <input type="hidden" name="user" value="<%= user %>"></input>
             <input name="listItem" id="item" type="text" placeholder="New Item">
             <button type="submit" style="margin-right: 15px;" name="list"  value=<%=title %>>+</button>
         </form>
@@ -38,6 +40,7 @@
 
 
     <form action="/days" method="post">
+        <input type="hidden" name="user" value="<%= user %>"></input>
         <div style="margin: 50px auto;text-align: center;">
     <button type="submit" style="width: 14rem;border-radius: 33px;background-color: yellow;color: black;font-family: 'Montserrat', 
     sans-serif;padding-top: 7px;box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);" >SUBMIT</button>
