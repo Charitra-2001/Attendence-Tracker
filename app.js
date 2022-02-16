@@ -12,6 +12,7 @@ const { required } = require("nodemon/lib/config");
 const { redirect } = require("express/lib/response");
 const { name } = require("ejs");
 const res = require("express/lib/response");
+const { use } = require("express/lib/router");
 const app = express();
 
 app.use(bodyParse.urlencoded({ extended: true }));
@@ -455,13 +456,20 @@ app.post("/modify", function (req, res) {
 
 /////////////////////////////////////////////////////////////////////////
 
-function findSub(sub, dayName) {
+function CheckSub(sub, dayName) {
   for (let i = 0; i < sub.length; i++) {
-    if (sub[i].name === dayName) return i;
+    if (sub[i].name === dayName) 
+    {
+      console.log(sub[i].name , ' ====================== ' , dayName)
+      return i;
+    }
   }
+  console.log("Now we are taking the value as -1");
   return -1;
 }
-
+// * arr[0]= [][][][][][][]
+// * arr[1]= [][][][][][][]
+// * arr[2]= [][][][][][][]
 const Subject = mongoose.model("Subject", subjectSchema);
 var arr = new Array();
 let weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
@@ -470,7 +478,7 @@ app.get("/nxt/:userName", async function (req, res) {
 
   let x = await User.findOne({ uname: userName });
   console.log(x);
-
+  var subupdate = new Array();
   // res.json(x)
   // let b=JSON.stringify(x);
   // console.log(x[0].items[0].name)
@@ -483,44 +491,38 @@ app.get("/nxt/:userName", async function (req, res) {
       }
       if (j >= 3) {
         arr[i][j - 2] = x.udays[i].items[j].name;
-        if (x.uduration === -1) {
-          const ab = await User.findOne({ uname: userName });
-          console.log(ab);
-          const zz = findSub(ab.usubjects, x.udays[i].items[j].name);
-          console.log(zz);
-          if (zz === -1) {
-            // console.log("HIIIIIIII");
-            const newSub = new Subject({
-              name: x.udays[i].items[j].name,
-              data: [],
-              days: x.udays[i].name,
-              totalDays: [],
-            });
-            const ba = await User.updateOne(
-              { uname: userName },
-              {
-                $set: {
-                  usubjects: [...ab.usubjects, newSub],
-                },
-              }
-            );
-          } else {
-            console.log(ab.usubjects[zz].name);
-            User.findOne({ uname: userName }, function (err, found) {
-              if (!err) {
-                if (found) {
-                  found.usubjects[zz].days.push(x.udays[i].name);
-                  found.save();
-                  console.log(found.usubjects);
-                }
-              }
-            });
-          }
+        let zz = CheckSub(subupdate,arr[i][j-2]);
+        if(zz===-1)
+        {
+          let subS=new Subject({
+            name:arr[i][j-2],
+            data:[],
+            days:arr[i][0],
+            totalDays:[]
+          })
+          subS.save();
+          subupdate.push(subS);
+         
+          
         }
+        else 
+        {
+          subupdate[zz].days.push(arr[i][0]);
+          
+        }
+
       }
     }
   }
+  // console.log(subupdate)
+  const axb = await User.updateOne({uname:userName},{
 
+    $set:{
+      usubjects:subupdate
+    }
+
+  })
+  // console.log(axb,x.usubjects)
   // console.log(arr);
   res.redirect("/next/" + userName);
 });
@@ -535,11 +537,13 @@ app.get("/next/:userName", function (req, res) {
 //// ! Third Page starts from Here
 
 // const Subject = mongoose.model("Subject", subjectSchema);
-
-//POST - ADDING DATES
 function findSub(sub, dayName) {
   for (let i = 0; i < sub.length; i++) {
-    if (sub[i].name === dayName) return i;
+    if (sub[i].name === dayName) 
+    {
+      
+      return i;
+    }
   }
   return -1;
 }
@@ -646,7 +650,7 @@ app.post("/total", async function (req, res) {
   }
   var p=Math.round((taken/taking)*100);
   percentage.push(p);
-  console.log(one, two, three);
+  // console.log(one, two, three);
   res.redirect("/allsubs/"+u);
 });
 app.get("/allsubs/:userName", function (req, res) {
