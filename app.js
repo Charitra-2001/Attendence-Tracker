@@ -514,16 +514,6 @@ app.get("/nxt/:userName", async function (req, res) {
                   console.log(found.usubjects);
                 }
               }
-              const length = ab.usubjects[zz].name.length;
-              const semlength = length * required;
-              User.updateOne(
-                { uname: userName },
-                {
-                  $set: {
-                    totalDays: semlength,
-                  },
-                }
-              );
             });
           }
         }
@@ -597,7 +587,7 @@ app.post("/attendance/:userName", async function (req, res) {
       });
     }
   }
-  res.redirect("/total");
+  res.redirect("/total/"+userName);
 });
 
 let work = [];
@@ -642,11 +632,12 @@ app.post("/total", async function (req, res) {
   // const {userName} = req.params;
   // const userName=u
   const t = await User.findOne({uname:u});
-  
+  console.log("This is the the t database : ", t)
   for (var i = 0; i < t.usubjects.length; i++) {
     one.push(t.usubjects[i].name);
     two.push(t.usubjects[i].data.length);
-    let totaldays = t.usubjects[i].length * 4 * t.uduration;
+    let totaldays = t.usubjects[i].days.length * 4 * t.uduration;
+    console.log(totaldays)
     three.push(totaldays);
     var p=Math.round((t.usubjects[i].data.length/totaldays)*100);
     percentage.push(p);
