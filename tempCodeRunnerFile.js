@@ -1,1 +1,1 @@
-pp.get(
+const Subject = mongoose.model("Subject", subjectSchema);
