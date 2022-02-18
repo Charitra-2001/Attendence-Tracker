@@ -339,8 +339,8 @@ app.get("/Friday/:userName", function (req, res) {
 // // })
 
 app.post("/", function (req, res) {
-  const itemName = req.body.listItem;
-  const listName = req.body.list;
+  let itemName = req.body.listItem;
+  itemName=itemName.toUpperCase();
   const u = req.body.user;
   console.log("u");
   const item = new Item({
