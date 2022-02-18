@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity=
+        "sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+        crossorigin="anonymous">
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"> 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="/public/style1.css">
+    
+    <title>Third Page</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+    <section class="howto">
+        <div id="steps" style="height: 18rem;" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#steps" data-slide-to="0" class="active"></li>
+              <li data-target="#steps" data-slide-to="1"></li>
+              <li data-target="#steps" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner ">
+              <div class="carousel-item active container-fluid">
+                <h1>hello</h1>
+                <!-- <img style="text-align: center; width: 5%; filter: invert(100%);" src="/public/imgs/smile.png" alt="First slide"> -->
+                <p>*this platform doesn't guarantee 100% results, because you can't :)</p>
+              </div>
+              <div id="s1" class="carousel-item container-fluid">
+                <h2>Here's what you can do</h2>
+                <img class="slides" src="/public/imgs/google.png" alt="First slide">
+                <h2>Get yourself an account and add your details</h2>
+              </div>
+              <div id="s2" class="carousel-item container-fluid">
+                <h2>Add your time-table</h2>
+                <img class="slides" src="/public/imgs/schedule.png" alt="Second slide">
+                <h2>And that's it</h2>
+              </div>
+              <div id="s3" class="carousel-item container-fluid">
+                <h2>Just mark your attendance every day</h2>
+                <h2>We will handle the calculation part.</h2>
+                <img class="slides" src="/public/imgs/happiness.png" alt="Third slide">
+                
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#steps" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            
+            </a>
+            <a class="carousel-control-next" href="#steps" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </a>
+          </div>
+    </section>
+    <section class="log">
+        <div class="container-fluid">
+            <!-- <button type="button" class="btn btn-primary btn-lg">New account</button> -->
+            <form action="/getaccount" method="get">
+            <button type="submit" class="btn btn-primary btn-lg">Let's get started</button>
+            </form>
+        </div>
+    </section>
+    <section class="about">
+        <div class="container-fluid">
+            <h2>About Us</h2>
+        </div>
+    </section>
+
+</body>
+</html>
