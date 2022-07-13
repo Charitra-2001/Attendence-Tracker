@@ -647,8 +647,8 @@ app.get("/attendence/:userName", async function (req, res) {
   day = d.getDay();
   const a = await User.findOne({ uname: userName });
   work.push(weekdays[day - 1]);
-  if (a !== null) {
-    for (let i = 3; i < a.udays[day - 1].items.length; i++) {
+  if (a !== null && a.udays[day - 1]) {
+    for (let i = 3; i < (a.udays[day - 1].items).length; i++) {
       work.push(a.udays[day - 1].items[i].name);
     }
   }
